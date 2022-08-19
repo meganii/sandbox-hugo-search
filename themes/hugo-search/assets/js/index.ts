@@ -3,17 +3,36 @@
 import Generator from 're_expand';
 
 const generator = new Generator();
-const qHugo = 'Hugo|hugo';
-const qGnerator = '(ジェネレーター|ジェネレータ)';
-const qTailwindCSS = '(TailwindCSS|tailwindcss)';
-generator.add(`(${qHugo})`, 'Hugoとは');
-generator.add(`静的サイト`, '静的サイトとは');
-generator.add(`静的サイト${qGnerator}`, '静的サイトジェネレータ');
-generator.add(`(${qHugo})で(ブログ|サイト)(作成|構築)`, 'Hugoでブログ作成');
-generator.add(`(ブログ|サイト)(作成|構築)`, 'Hugoでブログ作成');
-generator.add(`(${qHugo})CSS`, 'HugoでCSS');
-generator.add(`(${qHugo})で${qTailwindCSS}を使う`, 'HugoでTailwindCSSを使う');
-generator.add(`${qTailwindCSS}を${qHugo}で使う`, 'HugoでTailwindCSSを使う');
+
+(async () => {
+    const res = await fetch("http://localhost:1313/index.json");
+    const data = await res.json();
+    const posts = data['posts'];
+    console.log(posts);
+
+    for (const post of posts) {
+        const expandHelps = post.expandHelp;
+        if (expandHelps) {
+            for (const expandHelp of expandHelps) {
+                generator.add(expandHelp, `${post.url}\t${post.title}`);
+                console.log(expandHelp, `${post.url}\t${post.title}`);
+            }
+        }
+    }
+
+})();
+
+// const qHugo = 'Hugo|hugo';
+// const qGnerator = '(ジェネレーター|ジェネレータ)';
+// const qTailwindCSS = '(TailwindCSS|tailwindcss)';
+// generator.add(`(${qHugo})`, 'Hugoとは');
+// generator.add(`静的サイト`, '静的サイトとは');
+// generator.add(`静的サイト${qGnerator}`, '静的サイトジェネレータ');
+// generator.add(`(${qHugo})で(ブログ|サイト)(作成|構築)`, 'Hugoでブログ作成');
+// generator.add(`(ブログ|サイト)(作成|構築)`, 'Hugoでブログ作成');
+// generator.add(`(${qHugo})CSS`, 'HugoでCSS');
+// generator.add(`(${qHugo})で${qTailwindCSS}を使う`, 'HugoでTailwindCSSを使う');
+// generator.add(`${qTailwindCSS}を${qHugo}で使う`, 'HugoでTailwindCSSを使う');
 
 let urlList = new Set<string>();
 
@@ -38,7 +57,8 @@ if (searchBox) {
         if (urlList.size > 0) {
             let html = '<ul>';
             for (const url of urlList) {
-                html = html + `<li><a href='${url}'>${url}</a></li>\n`;
+                const urlTitle = url.split('\t');
+                html = html + `<li><a href='${urlTitle[0]}'>${urlTitle[1]}</a></li>\n`;
             }
             html = html + '</ul>';
             result!.innerHTML = html;

@@ -2,3 +2,6 @@ baseURL = 'http://example.org/'
 languageCode = 'en-us'
 title = 'My New Hugo Site'
 theme = 'hugo-search'
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]

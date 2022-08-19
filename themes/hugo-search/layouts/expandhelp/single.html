@@ -1,0 +1,13 @@
+{{ define "escape" }}
+  {{- trim (replace . "\n" " ") " " | replaceRE " +" " " | jsonify -}}
+{{ end }}
+
+{"data": [
+{{- range $index, $page := where .Site.Pages "Section" "post" }}
+  {
+    url: {{ $page.Permalink | jsonify }},
+    title: {{ $page.Title | jsonify }},
+    expandhelp: {{ $page.Params.ExpandHelp | jsonify }},
+  },
+{{- end }}
+]}

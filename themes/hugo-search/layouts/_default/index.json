@@ -1,0 +1,20 @@
+{{ define "replace" }}
+  {{- $expandStr := "" -}}
+  {{- range . -}}
+  {{- $q := "" -}}
+  {{- $q = replace . "{qHugo}" "hugo|Hugo" -}}
+  {{- $q = replace $q "{qTailwindCSS}" "tailwindcss|TailWind CSS|TailwindCSS|Tailwindcss" -}}
+  {{- $expandStr = print $expandStr $q "\t" -}}
+  {{- end -}}
+  {{ split (replaceRE "\t$" "" $expandStr) "\t" |  jsonify }}
+{{ end }}
+
+{
+  "posts": [{{ range $i, $v := .Site.RegularPages }}{{ if ne $i 0 }},{{ end }}{{ with $v }}
+    {
+      "title": {{ .Title | jsonify }},
+      "url": {{ .Permalink | jsonify }}{{ with .Params.expandHelp }},
+      "expandHelp": {{- block "replace" . }}{{- end }}{{ end }}
+    }{{ end }}{{ end }}
+  ]
+}
