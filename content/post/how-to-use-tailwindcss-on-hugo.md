@@ -5,4 +5,4 @@ expandHelp:
  - "({qHugo})?で?({qTailwindCSS})(を)?(使う)?"
 ---
 
-HugoでTailwindCSSを使う方法について。
+`Hugo`で`TailwindCSS`を使う方法について。

@@ -2,8 +2,8 @@
   {{- $expandStr := "" -}}
   {{- range . -}}
   {{- $q := "" -}}
-  {{- $q = replace . "{qHugo}" "hugo|Hugo" -}}
-  {{- $q = replace $q "{qTailwindCSS}" "tailwindcss|TailWind CSS|TailwindCSS|Tailwindcss" -}}
+  {{- $q = replace . "{qHugo}" "hugo|ヒューゴ" -}}
+  {{- $q = replace $q "{qTailwindCSS}" "(tailwind)?css|TailWind CSS|テイルウィンド" -}}
   {{- $expandStr = print $expandStr $q "\t" -}}
   {{- end -}}
   {{ split (replaceRE "\t$" "" $expandStr) "\t" |  jsonify }}
