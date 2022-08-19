@@ -5,7 +5,7 @@ import Generator from 're_expand';
 const generator = new Generator();
 
 (async () => {
-    const res = await fetch("http://localhost:1313/index.json");
+    const res = await fetch("/index.json");
     const data = await res.json();
     const posts = data['posts'];
     console.log(posts);
