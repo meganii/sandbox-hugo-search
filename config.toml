@@ -1,6 +1,6 @@
-baseURL = 'http://example.org/'
-languageCode = 'en-us'
-title = 'My New Hugo Site'
+baseURL = 'https://sandbox-hugo-search.pages.dev/'
+languageCode = 'ja-jp'
+title = 'Hugo Search sandbox'
 theme = 'hugo-search'
 
 [outputs]
