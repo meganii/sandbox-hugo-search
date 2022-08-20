@@ -3,9 +3,11 @@
     {{- partial "head.html" . -}}
     <body>
         {{- partial "header.html" . -}}
-        <div id="content">
-            <input id="searchbox" type="text">
-            <div id="result"></div>
+        <div id="content" class="pt-28 flex flex-col justify-center items-center">
+            <h1 class="text-2xl font-bold">展開ヘルプ検索</h1>
+            <div>単語をスペースで区切って入力</div>
+            <input id="searchbox" type="text" class="placeholder-shown:border-gray-500 border-2" placeholder="Type search words">
+            <div id="result" class="flex items-center pt-2"></div>
         </div>
         {{- partial "footer.html" . -}}
         {{- partial "footer-script.html" -}}

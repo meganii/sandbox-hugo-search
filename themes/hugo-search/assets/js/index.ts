@@ -58,7 +58,7 @@ if (searchBox) {
             let html = '<ul>';
             for (const url of urlList) {
                 const urlTitle = url.split('\t');
-                html = html + `<li><a href='${urlTitle[0]}'>${urlTitle[1]}</a></li>\n`;
+                html = html + `<li><a class="text-blue-500 hover:underline" href='${urlTitle[0]}'>${urlTitle[1]}</a></li>\n`;
             }
             html = html + '</ul>';
             result!.innerHTML = html;
